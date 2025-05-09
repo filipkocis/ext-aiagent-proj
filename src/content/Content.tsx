@@ -25,6 +25,11 @@ export default function Content() {
     return refData.current!
   }
 
+  const setDataHandler = (data: Data) => {
+    setData(data)
+    refData.current = data
+  }
+
   const hoverHandler = useCallback((event: MouseEvent) => {
     const target = event.target as HTMLElement;
     const itemEl = target.closest<HTMLElement>("[inj-item-id]")
@@ -56,8 +61,8 @@ export default function Content() {
   }, [])
 
   useEffect(() => {
-    registerListener(getData, setData)
-    runScan(setData)
+    registerListener(getData, setDataHandler)
+    runScan(setDataHandler)
   }, [])
 
   useEffect(() => {

@@ -1,8 +1,7 @@
-import type { Dispatch, SetStateAction } from "react";
 import type { Data } from "./Content";
 import { runScan } from "./gemini";
 
-export function registerListener(getData: () => Data, setData: Dispatch<SetStateAction<Data>>) {
+export function registerListener(getData: () => Data, setData: (data: Data) => void) {
   chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
     if (request.type === "SELECT") {
       const index = request.payload.index  
